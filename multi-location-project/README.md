@@ -1,6 +1,12 @@
 # multi-location-project
 
-This example shows how to create a dagster project with two code locations. Each code location has a different set of dependencies. Both code locations share some code.
+This example shows how to create a dagster project with two code locations. 
+Each code location has a different set of dependencies. 
+Both code locations share some code.
+
+On top of that, the shared resource can be used as asset across multiple code
+locations. This is a proof of concept and not production tested (locally, not 
+in Dagster Cloud).
 
 ## Directory structure
 
