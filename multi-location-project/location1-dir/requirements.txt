@@ -1,1 +1,3 @@
 ../shared-dir
+GitPython
+deepdiff

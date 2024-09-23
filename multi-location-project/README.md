@@ -1,54 +1,51 @@
-# multi-location-project
-
-This example shows how to create a dagster project with two code locations. 
-Each code location has a different set of dependencies. 
-Both code locations share some code.
-
-On top of that, the shared resource can be used as asset across multiple code
-locations. This is a proof of concept and not production tested (locally, not 
-in Dagster Cloud).
-
-## Directory structure
+# Create venv
 
 ```
-# dagster_cloud.yaml at the top level defines two code locations
-./dagster_cloud.yaml
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples
+rez env python-3.9
+python -m venv venv_test_01
+source venv_test_01/bin/activate
+python -m pip install --upgrade pip
+pip install dagster dagster-webserver
+```
 
-# shared-dir contains shared code in a package called 'shared' and its own setup.py
-./shared-dir
-./shared-dir/shared
-./shared-dir/shared/__init__.py
-./shared-dir/setup.py
+## Run Pycharm
 
-# location1-dir contains code for one code location in a module called 'location1'
-./location1-dir
-./location1-dir/requirements.txt  # this includes ../shared-dir
-./location1-dir/setup.py          # this includes location1 specific dependencies
-./location1-dir/location1
-./location1-dir/location1/__init__.py
-./location1-dir/location2/assets.py
+```
+rez env python-3.9
+/scratch/michaelmus/Applications/pycharm-current/bin/pycharm.sh
+```
 
+## Activate venv
 
-./location2-dir
-./location2-dir/requirements.txt  # this includes ../shared-dir
-./location2-dir/setup.py          # this includes location2 specific dependencies
-./location2-dir/location2
-./location2-dir/location2/__init__.py
-./location2-dir/location2/assets.py
+```
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples
+rez env python-3.9
+source venv_test_01/bin/activate
 ```
 
 ## Running locally
-To run locally via `dagster dev`, pip install the two projects:
+
+### Build deps
 
 ```
-cd ./location1-dir
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples
+rez env python-3.9
+source venv_test_01/bin/activate
+
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples/multi-location-project/location1-dir
 pip install -e .[dev] -r requirements.txt
-cd ../location2-dir
-pip install -e .[dev] -r requirements.txt
 ```
 
-And run `dagster dev` in this folder, which will use the `workspace.yaml` file to load both Dagster projects in the Dagster UI:
+
 
 ```
-dagster dev
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples
+rez env python-3.9
+source venv_test_01/bin/activate
+mkdir -p /home/users/michaelmus/git/repos/dagster/cloud-examples/materializations
+
+cd /home/users/michaelmus/git/repos/dagster/cloud-examples/multi-location-project
+export DAGSTER_HOME=/home/users/michaelmus/git/repos/dagster/cloud-examples/materializations
+dagster dev --workspace workspace.yaml
 ```
