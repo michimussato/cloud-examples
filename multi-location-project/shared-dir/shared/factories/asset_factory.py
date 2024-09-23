@@ -1,15 +1,22 @@
+import typing
+
 from dagster import (
     asset,
     Output,
     AssetMaterialization,
     AssetsDefinition,
-    RetryPolicy,
-    Backoff,
-    Jitter,
+    # RetryPolicy,
+    # Backoff,
+    # Jitter,
 )
 
 
-def asset_factory(group_name, spec) -> AssetsDefinition:
+def asset_factory(
+        group_name: str,
+        spec: dict[
+            str, typing.Union[str, callable],
+        ],
+) -> AssetsDefinition:
 
     @asset(
         group_name=group_name,
@@ -23,7 +30,7 @@ def asset_factory(group_name, spec) -> AssetsDefinition:
         #     jitter=Jitter.FULL,
         # ),
     )
-    def _asset() -> dict:
+    def _asset() -> typing.Union[Output, AssetMaterialization]:
 
         yield Output(spec["value"])
 

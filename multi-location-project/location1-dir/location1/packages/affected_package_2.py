@@ -8,9 +8,9 @@ from dagster import (
 )
 
 
-package: str = "AL_vortex_library_edit"
-version: str = "0.33.2"
-git_repo: str = "vortexLibrary"
+package: str = "AL_affected_package_2"
+version: str = "1.23.4"
+git_repo: str = "repoAffected"
 
 
 package_dict: dict = {
