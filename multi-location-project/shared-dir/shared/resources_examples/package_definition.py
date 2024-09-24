@@ -83,7 +83,7 @@ def get_package_assets() -> list[AssetsDefinition]:
     package_assets = [
         asset_factory(
             group_name=f"AL_PACKAGE__{package_dict['group_name']}",
-            spec=spec
+            spec=spec,
         ) for spec in package_dict["assets"]
     ]
     return package_assets

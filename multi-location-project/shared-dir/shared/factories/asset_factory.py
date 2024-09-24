@@ -20,6 +20,7 @@ def asset_factory(
 
     @asset(
         group_name=group_name,
+        compute_kind="python",
         key_prefix=spec["key_prefix"],
         name=spec["name"],
         deps=spec["deps"],
