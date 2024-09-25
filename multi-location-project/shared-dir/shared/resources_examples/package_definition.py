@@ -9,7 +9,7 @@ from dagster import (
 
 
 package: str = "AL_vortex_library_edit"
-version: str = "0.33.2"
+version: str = "1.1.1"
 git_repo: str = "vortexLibrary"
 
 

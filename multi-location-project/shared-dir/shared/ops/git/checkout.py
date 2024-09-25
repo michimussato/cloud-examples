@@ -17,27 +17,27 @@ from shared.ops.git import docstrings_git as docstrings_dict
 
 @op(
     ins={
-        "BRANCH_NAME": In(
-            description=docstrings_dict["BRANCH_NAME"],
-        ),
-        "GIT_REPO_NAME": In(
-            description=docstrings_dict["GIT_REPO_NAME"],
-        ),
-        "MASTER_BRANCH": In(
-            description=docstrings_dict["MASTER_BRANCH"],
-        ),
-        "LOCAL_GIT_REPO_DIR": In(
-            description=docstrings_dict["LOCAL_GIT_REPO_DIR"],
-        ),
+        # "BRANCH_NAME": In(
+        #     description=docstrings_dict["BRANCH_NAME"],
+        # ),
+        # "GIT_REPO_NAME": In(
+        #     description=docstrings_dict["GIT_REPO_NAME"],
+        # ),
+        # "MASTER_BRANCH": In(
+        #     description=docstrings_dict["MASTER_BRANCH"],
+        # ),
+        # "LOCAL_GIT_REPO_DIR": In(
+        #     description=docstrings_dict["LOCAL_GIT_REPO_DIR"],
+        # ),
     },
 )
 @fmydocstring(docstrings_dict)
 def checkout(
         context: AssetExecutionContext,
-        BRANCH_NAME: str,
-        GIT_REPO_NAME: str,
-        MASTER_BRANCH: str,
-        LOCAL_GIT_REPO_DIR: str,
+        # BRANCH_NAME: str,
+        # GIT_REPO_NAME: str,
+        # MASTER_BRANCH: str,
+        # LOCAL_GIT_REPO_DIR: str,
 
 ) -> MaterializeResult:
     """
@@ -69,19 +69,24 @@ Args:
     GIT_REPO_NAME (str):      {docstrings_dict["GIT_REPO_NAME"]}
     MASTER_BRANCH (str):      {docstrings_dict["MASTER_BRANCH"]}
     LOCAL_GIT_REPO_DIR (str): {docstrings_dict["LOCAL_GIT_REPO_DIR"]}
+```
 
 ## Returns
 
+```
 Returns:
+```
 
 ## Yields
 
+```
 Yields:
+```
 
 ## Raises
 
+```
 Raises:
-
 ```
 
     """

@@ -9,7 +9,7 @@ from dagster import (
 
 
 package: str = "AL_affected_package_1"
-version: str = "4.32.1"
+version: str = "7.7.7"
 git_repo: str = "affectedRepo"
 
 
