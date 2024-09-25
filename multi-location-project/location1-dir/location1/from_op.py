@@ -39,24 +39,24 @@ for asset_from_op in [package_dict, package_dict_affected_package_1, package_dic
             "result": AssetKey(f"build_test_package_{asset_from_op['package']}"),
         },
     )
-    # vars()[f"checkout_{asset_from_op['package']}"] = AssetsDefinition.from_op(
-    #     checkout,
-    #     group_name="checkout",
-    #     # keys_by_input_name={
-    #     #     "BUILD_CWD": AssetKey(
-    #     #         [asset_from_op['package'], "BUILD_CWD"],
-    #     #     ),
-    #     #     "RND_PACKAGES": AssetKey("RND_PACKAGES"),
-    #     #     "AL_PACKAGE_NAME": AssetKey(
-    #     #         [asset_from_op['package'], "AL_PACKAGE_NAME"],
-    #     #     ),
-    #     #     "AL_PACKAGE_VERSION": AssetKey(
-    #     #         [asset_from_op['package'], "AL_PACKAGE_VERSION"],
-    #     #     ),
-    #     #     "REZ_EXE": AssetKey("REZ_EXE"),
-    #     #     "black": AssetKey(f"black_formatter__{asset_from_op['package']}"),
-    #     # },
-    #     keys_by_output_name={
-    #         "result": AssetKey(f"checkout_{asset_from_op['package']}"),
-    #     },
-    # )
+    vars()[f"checkout_{asset_from_op['package']}"] = AssetsDefinition.from_op(
+        checkout,
+        group_name="checkout",
+        # keys_by_input_name={
+        #     "BUILD_CWD": AssetKey(
+        #         [asset_from_op['package'], "BUILD_CWD"],
+        #     ),
+        #     "RND_PACKAGES": AssetKey("RND_PACKAGES"),
+        #     "AL_PACKAGE_NAME": AssetKey(
+        #         [asset_from_op['package'], "AL_PACKAGE_NAME"],
+        #     ),
+        #     "AL_PACKAGE_VERSION": AssetKey(
+        #         [asset_from_op['package'], "AL_PACKAGE_VERSION"],
+        #     ),
+        #     "REZ_EXE": AssetKey("REZ_EXE"),
+        #     "black": AssetKey(f"black_formatter__{asset_from_op['package']}"),
+        # },
+        keys_by_output_name={
+            "result": AssetKey(f"checkout_{asset_from_op['package']}"),
+        },
+    )
