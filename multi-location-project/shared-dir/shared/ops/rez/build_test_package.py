@@ -11,25 +11,26 @@ from dagster import (Output,
 
 
 @op(
-    # ins={
-    #     "BUILD_CWD": In(),
-    #     "RND_PACKAGES": In(),
-    #     "AL_PACKAGE_NAME": In(),
-    #     "AL_PACKAGE_VERSION": In(),
-    #     "REZ_EXE": In(),
-    #     "black": In(),
-    # },
+    ins={
+        "BUILD_CWD": In(),
+        "RND_PACKAGES": In(),
+        "AL_PACKAGE_NAME": In(),
+        "AL_PACKAGE_VERSION": In(),
+        "REZ_EXE": In(),
+        "black": In(),
+    },
 )
 def build_test_package(
         context: AssetExecutionContext,
-        # BUILD_CWD: str,
-        # RND_PACKAGES: str,
-        # AL_PACKAGE_NAME: str,
-        # AL_PACKAGE_VERSION: str,
-        # REZ_EXE: str,
-        # black: bool,  # DEPENDENCY; not actually used
+        BUILD_CWD: str,
+        RND_PACKAGES: str,
+        AL_PACKAGE_NAME: str,
+        AL_PACKAGE_VERSION: str,
+        REZ_EXE: str,
+        black: bool,  # DEPENDENCY; not actually used
 ) -> str:
     """
+    Todo
     Building the test package to RND_PACKAGES.
     alias: `bre`
     cmd: `rez build -c -i --ba ' -Dsymlink=OFF' --prefix RND_PACKAGES`

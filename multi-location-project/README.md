@@ -35,6 +35,8 @@ source venv_test_01/bin/activate
 
 cd /home/users/michaelmus/git/repos/dagster/cloud-examples/multi-location-project/location1-dir
 pip install -e .[dev] -r requirements.txt
+# force reinstall
+# pip install -e .[dev] --force-reinstall -r requirements.txt --no-cache-dir
 ```
 
 
