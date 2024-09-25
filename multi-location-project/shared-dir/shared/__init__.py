@@ -9,6 +9,15 @@ def shared_function(
         context: AssetExecutionContext,
         **kwargs
 ) -> AssetMaterialization:
+    """
+
+    Args:
+        context ():
+        **kwargs ():
+
+    Returns:
+
+    """
 
     yield Output("Return Value")
 

@@ -11,6 +11,9 @@ from dagster import (
     MetadataValue,
 )
 
+from shared.decorators.fmydocstring import fmydocstring
+from shared.ops.git import docstrings_git as docstrings_dict
+
 
 @op(
     ins={
@@ -19,7 +22,8 @@ from dagster import (
         "GIT_REPO_NAME": In(),
     },
 )
-def clone_repo(
+@fmydocstring(docstrings_dict)
+def clone(
         context: AssetExecutionContext,
         GIT_SSH: str,
         LOCAL_GIT_REPO_DIR: str,
@@ -29,6 +33,14 @@ def clone_repo(
     """
     Make sure that the dev branch exists on the remote.
     `rez test` will fail if not pushed prior.
+
+    ```
+    Args:
+        context (dagster.AssetExecutionContext):
+        GIT_SSH (str):            {docstrings_dict["GIT_SSH"]}
+        LOCAL_GIT_REPO_DIR (str): {docstrings_dict["LOCAL_GIT_REPO_DIR"]}
+        GIT_REPO_NAME (str):      {docstrings_dict["GIT_REPO_NAME"]}
+    ```
     """
 
     # git ls-remote --heads origin refs/heads/$WRANGLER_BRANCH_NAME
