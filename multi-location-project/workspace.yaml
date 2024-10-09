@@ -1,5 +1,5 @@
 load_from:
   - python_package:
       package_name: location1
-      location_name: location1
+      location_name: "My Code Location"
 #      working_directory: location1-dir

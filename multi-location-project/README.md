@@ -1,53 +1,30 @@
-# Create venv
+<!-- TOC -->
+* [Reusable Dagster Assets](#reusable-dagster-assets)
+  * [Running locally](#running-locally)
+<!-- TOC -->
 
-```
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples
-rez env python-3.9
-python -m venv venv_test_01
-source venv_test_01/bin/activate
-python -m pip install --upgrade pip
-pip install dagster dagster-webserver
-```
+---
 
-## Run Pycharm
+# Reusable Dagster Assets
 
-```
-rez env python-3.9
-/scratch/michaelmus/Applications/pycharm-current/bin/pycharm.sh
-```
+These WIP examples demonstrate different ways
+(proof of concept) to create re-usable/shareable
+Dagster Assets:
 
-## Activate venv
-
-```
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples
-rez env python-3.9
-source venv_test_01/bin/activate
-```
+- factories
+- ops
 
 ## Running locally
+To run locally via `dagster dev`, pip install the two projects:
 
-### Build deps
-
-```
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples
-rez env python-3.9
-source venv_test_01/bin/activate
-
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples/multi-location-project/location1-dir
+```shell
+cd ~/git/repos/cloud-examples/multi-location-project
+cd ./location1-dir
 pip install -e .[dev] -r requirements.txt
-# force reinstall
-# pip install -e .[dev] --force-reinstall -r requirements.txt --no-cache-dir
+cd ..
+dagster dev
 ```
 
+---
 
-
-```
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples
-rez env python-3.9
-source venv_test_01/bin/activate
-mkdir -p /home/users/michaelmus/git/repos/dagster/cloud-examples/materializations
-
-cd /home/users/michaelmus/git/repos/dagster/cloud-examples/multi-location-project
-export DAGSTER_HOME=/home/users/michaelmus/git/repos/dagster/cloud-examples/materializations
-dagster dev --workspace workspace.yaml
-```
+Ref: https://github.com/dagster-io/cloud-examples

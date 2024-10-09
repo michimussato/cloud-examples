@@ -1,14 +1,13 @@
 import os
-import subprocess
 import tempfile
+import subprocess
 
-from dagster import (
-    MetadataValue,
-    op,
-    In,
-    AssetExecutionContext,
-    MaterializeResult,
-)
+from dagster import (op,
+                     In,
+                     OpExecutionContext,
+                     MaterializeResult,
+                     MetadataValue,
+                     )
 
 
 @op(
@@ -18,10 +17,9 @@ from dagster import (
         "REZ_TEST__REZ_LOCAL_PACKAGES_PATH": In(),
         "AL_PACKAGE_NAME": In(),
     },
-    # out=
 )
 def rez_test(
-        context: AssetExecutionContext,
+        context: OpExecutionContext,
         BUILD_CWD: str,
         REZ_EXE: str,
         REZ_TEST__REZ_LOCAL_PACKAGES_PATH: str,
@@ -34,13 +32,14 @@ def rez_test(
 
     ```
     Args:
-        AL_PACKAGE_NAME ():
-        REZ_TEST__REZ_LOCAL_PACKAGES_PATH ():
-        context ():
-        BUILD_CWD ():
-        REZ_EXE ():
+        context:
+        BUILD_CWD:
+        REZ_EXE:
+        REZ_TEST__REZ_LOCAL_PACKAGES_PATH:
+        AL_PACKAGE_NAME:
 
     Returns:
+        MaterializeResult:
 
     ```
     """
@@ -54,7 +53,7 @@ def rez_test(
 
         my_env = {**os.environ, "REZ_LOCAL_PACKAGES_PATH": tmp_dir}
 
-        context.log.info(f"rez test temp directory: {tmp_dir}")
+        context.log.info(f"Test Dir: {tmp_dir}")
 
         cmd = [
             REZ_EXE,
@@ -75,6 +74,18 @@ def rez_test(
             text=True,
         )
 
+        # while True:
+        #     std = proc.stdout.readline()
+        #     err = proc.stderr.readline()
+        #     if proc.poll() is not None:
+        #         break
+        #     if std:
+        #         context.log.info(std)
+        #     if err:
+        #         context.log.warning(err)
+        #
+        #
+
         stdout, stderr = proc.communicate()
         return_code = proc.returncode
 
@@ -82,15 +93,10 @@ def rez_test(
         context.log.error(stderr)
         context.log.info(return_code)
 
-    # if "Test failed with exit code 1" in stdout or return_code:
-    if return_code:
-        raise Exception("Test failed")
-
     yield MaterializeResult(
         asset_key=context.asset_key,
         metadata={
             # 'Test successful': MetadataValue.bool(True),
-            'cwd': MetadataValue.path(BUILD_CWD),
             'cmd': MetadataValue.md(f"`{cmd}`"),
             'cmd (str)': MetadataValue.path(" ".join(cmd)),
             'environ (full)': MetadataValue.json(dict(os.environ)),
@@ -98,3 +104,27 @@ def rez_test(
             'stderr': MetadataValue.md(f"```shell\n{stderr}\n```"),
         }
     )
+
+    # if "Test failed with exit code 1" in stdout or return_code:
+    if return_code:
+        raise Exception("Test failed")
+
+
+# Example:
+# rez_test_AL_otio = AssetsDefinition.from_op(
+#     rez_test,
+#     group_name="testing_packages__AL_otio",
+#     keys_by_input_name={
+#         "BUILD_CWD": AssetKey(
+#             ["AL_otio", "BUILD_CWD"],
+#         ),
+#         "REZ_EXE": AssetKey("REZ_EXE"),
+#         "REZ_TEST__REZ_LOCAL_PACKAGES_PATH": AssetKey("REZ_TEST__REZ_LOCAL_PACKAGES_PATH"),
+#         "AL_PACKAGE_NAME": AssetKey(
+#             ["AL_otio", "AL_PACKAGE_NAME"],
+#         ),
+#     },
+#     keys_by_output_name={
+#         "result": AssetKey("rez_test_AL_otio"),
+#     },
+# )
