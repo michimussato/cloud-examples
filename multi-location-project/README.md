@@ -22,7 +22,7 @@ cd ~/git/repos/cloud-examples/multi-location-project
 cd ./location1-dir
 pip install -e .[dev] -r requirements.txt
 cd ..
-dagster dev
+DAGSTER_HOME="~/git/repos/cloud-examples/materializations" dagster dev --workspace ~/git/repos/cloud-examples/multi-location-project/workspace.yaml
 ```
 
 ---
