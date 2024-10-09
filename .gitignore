@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Dagster temp
-*/multi-location-project/tmp*/
-*/materializations/*/
+**/multi-location-project/tmp*/
+**/materializations/**
